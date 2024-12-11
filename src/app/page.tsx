@@ -1,4 +1,4 @@
-import { type MetaFunction, Form, useNavigation } from "react-router";
+"use client";
 import { cx } from "class-variance-authority";
 import { Button } from "~/components/Button";
 import { Card } from "~/components/Card";
@@ -7,28 +7,34 @@ import { SpinnerIcon } from "~/icons/Spinner";
 import { useAppActions, useCustomFields } from "~/store";
 import { useForm } from "~/hooks/useForm";
 import { FormFields } from "~/components/FormFields";
-
-export const meta: MetaFunction = () => {
-  return [{ title: "APP" }, { name: "color-scheme", content: "light dark" }];
-};
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Index() {
-  const navigation = useNavigation();
+  const router = useRouter();
   const customFields = useCustomFields();
   const actions = useAppActions();
 
   const { formRef, valid } = useForm();
-  const isSubmitting = navigation.state !== "idle";
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const submitEnable = valid && !isSubmitting;
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <Form
+      <form
         ref={formRef}
         method="post"
-        action="/dashboard"
-        onSubmit={(e) => {
-          actions.addSubmission(new FormData(e.currentTarget));
+        onSubmit={async (e) => {
+          e.preventDefault();
+          setIsSubmitting(true);
+          const submission = new FormData(e.currentTarget);
+          try {
+            await new Promise((res) => setTimeout(res, 3000));
+          } finally {
+            setIsSubmitting(false);
+          }
+          actions.addSubmission(submission);
+          router.push("/dashboard");
         }}
       >
         <Card className="flex flex-col px-4 py-4 sm:px-8 sm:py-6 lg:px-16 lg:py-8">
@@ -58,7 +64,7 @@ export default function Index() {
             </Button>
           </div>
         </Card>
-      </Form>
+      </form>
     </div>
   );
 }

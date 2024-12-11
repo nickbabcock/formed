@@ -2,7 +2,8 @@
 
 ```
 npm install
-npm run dev
+npm run build
+npm run start
 ```
 
-Visit http://localhost:5173/
+Visit http://localhost:3000

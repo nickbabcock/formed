@@ -4,17 +4,16 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "react-router build",
-    "dev": "react-router dev",
+    "build": "next build",
+    "dev": "next dev --turbopack",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "format": "prettier --write .",
-    "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "start": "next start",
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "@react-router/node": "7.0.2",
-    "@react-router/serve": "7.0.2",
     "class-variance-authority": "0.7.1",
+    "next": "15.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-router": "7.0.2",
@@ -22,8 +21,6 @@
     "zustand": "5.0.2"
   },
   "devDependencies": {
-    "@react-router/dev": "7.0.2",
-    "@react-router/fs-routes": "7.0.2",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
     "eslint": "9.14.0",

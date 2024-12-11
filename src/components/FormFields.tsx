@@ -2,7 +2,10 @@ import { FormField } from "~/components/FormField";
 import { CustomField, CustomFieldId } from "~/store";
 
 export function FormFields({
-  customFields, defaultValues, onLabelChange, onDeletion,
+  customFields,
+  defaultValues,
+  onLabelChange,
+  onDeletion,
 }: {
   customFields: CustomField[];
   defaultValues?: Record<string, string | number>;
@@ -15,14 +18,16 @@ export function FormFields({
         label="Name"
         className="min-w-64 px-4 pb-3 pt-5"
         defaultValue={defaultValues?.["Name"]}
-        required />
+        required
+      />
 
       <FormField
         label="Email"
         className="w-64 px-4 pb-3 pt-5"
         type="email"
         required
-        defaultValue={defaultValues?.["Email"]} />
+        defaultValue={defaultValues?.["Email"]}
+      />
 
       <FormField
         label="Age"
@@ -31,7 +36,8 @@ export function FormFields({
         min={0}
         max={200}
         required
-        defaultValue={defaultValues?.["Age"]} />
+        defaultValue={defaultValues?.["Age"]}
+      />
 
       {customFields.map((x) => (
         <FormField
@@ -39,9 +45,12 @@ export function FormFields({
           label={x.label}
           className="w-64 px-4 pb-3 pt-5"
           required
-          onLabelChange={onLabelChange ? (label) => onLabelChange(x.id, label) : undefined}
+          onLabelChange={
+            onLabelChange ? (label) => onLabelChange(x.id, label) : undefined
+          }
           onDeletion={onDeletion ? () => onDeletion(x.id) : undefined}
-          defaultValue={defaultValues?.[x.label]} />
+          defaultValue={defaultValues?.[x.label]}
+        />
       ))}
     </div>
   );

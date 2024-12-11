@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 
 export const useForm = () => {
@@ -24,5 +25,3 @@ export const useForm = () => {
     formRef,
   };
 };
-
-

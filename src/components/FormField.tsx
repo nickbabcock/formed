@@ -1,3 +1,4 @@
+"use client";
 import React, { ComponentPropsWithoutRef, useId, useState } from "react";
 import { Input } from "./Input";
 import { cx } from "class-variance-authority";
@@ -15,13 +16,6 @@ export const FormField = React.forwardRef<
   { label, className, onDeletion, onLabelChange, ...rest },
   ref,
 ) {
-  // const [label, setLabel] = useState(labelInput);
-  // const [prevLabel, setPrevLabel] = useState(labelInput);
-  // if (labelInput !== prevLabel) {
-  //   setLabel(labelInput);
-  //   setPrevLabel(labelInput);
-  // }
-
   const errId = useId();
   const labelId = useId();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

@@ -2,17 +2,17 @@ name: CI
 on:
   pull_request:
   push:
-    branches: ['master']
+    branches: ["master"]
   schedule:
-  - cron: '00 01 * * *'
+    - cron: "00 01 * * *"
 
 jobs:
   test:
     name: test
-    runs-on: 'ubuntu-latest'
+    runs-on: "ubuntu-latest"
     steps:
-    - uses: actions/checkout@v4
-    - name: Npm Install
-      run: npm ci
-    - name: Build app
-      run: npm run build
+      - uses: actions/checkout@v4
+      - name: Npm Install
+        run: npm ci
+      - name: Build app
+        run: npm run build

@@ -1,4 +1,4 @@
-import { type ActionFunctionArgs, redirect } from "react-router";
+"use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Card } from "~/components/Card";
 import { Pie } from "~/components/Pie";
@@ -9,13 +9,6 @@ import { cx } from "class-variance-authority";
 import { PencilSquare } from "~/icons/PencilSquare";
 import { useForm } from "~/hooks/useForm";
 import { FormFields } from "~/components/FormFields";
-
-export async function action({ request }: ActionFunctionArgs) {
-  const form = await request.formData();
-  await new Promise((res) => setTimeout(res, 1000));
-  console.log("form saved", form);
-  return redirect("/dashboard", 302);
-}
 
 type Entry = { Name: string; Age: number; Email: string } & {
   [key: string]: string | number;
@@ -32,9 +25,7 @@ function useServerData({ page }: { page: number }) {
     }
 
     if (submission) {
-      const submissionData = Object.fromEntries(
-        submission.entries(),
-      ) as Entry;
+      const submissionData = Object.fromEntries(submission.entries()) as Entry;
       submissionData.Age = +submissionData.Age;
       serverData.push(submissionData);
     }
@@ -42,8 +33,8 @@ function useServerData({ page }: { page: number }) {
     for (let i = 0; i < 10_000; i++) {
       serverData.push({
         ...fakeData(`${i}`),
-        ...Object.fromEntries(customFields.map((x) => [x.label, ""]))
-    });
+        ...Object.fromEntries(customFields.map((x) => [x.label, ""])),
+      });
     }
 
     setLocalData(serverData);
